@@ -650,11 +650,11 @@ client.on('message', message => {
 
         .addField('np', 'اظهار المقطع اللي انت مشغلها حاليا')
 
-	.addField('-')
+	.addField('-', '-')
 	
-	.addField('مهم', 'ابري ذمتي امام الله وخلقه اني غير مسؤول عن اي اغنيه من البوت هذا')
+	.addField('مهم', 'ابري ذمتي امام الله وخلقه اني غير مسؤول عن اي موسيقى من البوت هذا')
 	
-	.addField('-')
+	.addField('-', '-')
 	
         .setFooter('WhybH | All right saved, Mallory.')
 
