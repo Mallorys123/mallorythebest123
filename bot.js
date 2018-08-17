@@ -652,9 +652,9 @@ client.on('message', message => {
 
 	.addField('-', 'مهم')
 	
-	.addField('ابري ذمتي امام الله وخلقه اني غير مسؤول عن اي موسيقى من البوت هذا', '-')
+	.addField('ابري ذمتي امام الله وخلقه اني غير مسؤول عن اي موسيقى تشغل في البوت هذا', '-')
 	
-        .setFooter('WhybH | All right saved, Mallory.')
+        .setFooter('wHybh. | All right saved, Mallory.')
 
       message.channel.send(helpEmbed);
 
@@ -666,7 +666,7 @@ client.on('message', message => {
 
 client.on('message', message => {
 
-    if (message.content === 'general_commands') {
+    if (message.content === 'mkkkjgeneral_commands') {
 
         let helpEmbed = new Discord.RichEmbed()
 
