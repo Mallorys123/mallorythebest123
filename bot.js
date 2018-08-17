@@ -74,11 +74,9 @@ client.on('message', async msg =>{
 
     .setColor(3447003)
 
-    .setTitle("Pong!!")
+    .setTitle("Ping is :")
 
     .setDescription(`${client.ping} ms,`)
-
-    .setFooter(`Requested by | ${msg.author.tag}`);
 
     msg.delete().catch(O_o=>{})
 
@@ -652,11 +650,11 @@ client.on('message', message => {
 
         .addField('np', 'اظهار المقطع اللي انت مشغلها حاليا')
 
-	.addField('', '')
+	.addField('-')
 	
 	.addField('مهم', 'ابري ذمتي امام الله وخلقه اني غير مسؤول عن اي اغنيه من البوت هذا')
 	
-	.addField('', '')
+	.addField('-')
 	
         .setFooter('WhybH | All right saved, Mallory.')
 
