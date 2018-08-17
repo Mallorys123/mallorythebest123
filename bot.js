@@ -652,7 +652,31 @@ client.on('message', message => {
 
         .addField('np', 'اظهار الاغنية اللي انت مشغلها حاليا')
 
-        .setFooter('wHybH | All right saved.')
+        .setFooter('WhybH | All right saved, Mallory.')
+
+      message.channel.send(helpEmbed);
+
+    }
+
+});
+
+
+
+client.on('message', message => {
+
+    if (message.content === 'general_commands') {
+
+        let helpEmbed = new Discord.RichEmbed()
+
+        .setTitle('**أوامر عامة...**')
+
+        .addField('avatar', "افاتار الشخص المطلوب")
+
+        .addField('gif', 'البحث عن جيف انت تطلبه')
+
+        .addField('ping', 'معرفة ping البوت')
+
+        .setFooter('المزيد قريبا ان شاء الله!')
 
       message.channel.send(helpEmbed);
 
@@ -663,3 +687,4 @@ client.on('message', message => {
 
 
 client.login(process.env.BOT_TOKEN);
+
