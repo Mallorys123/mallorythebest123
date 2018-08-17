@@ -632,26 +632,32 @@ client.on('message', message => {
 
         let helpEmbed = new Discord.RichEmbed()
 
-        .setTitle('**أوامر الميوزك...**')
+        .setTitle('**اوامر البوت**')
 
-        .setDescription('**برفكس البوت (!)**')
+        .setDescription('**برفكس البوت | !**')
 
-        .addField('play', 'لتشغيل اغنية')
+        .addField('play', 'لتشغيل المقطع')
 
         .addField('join', 'دخول رومك الصوتي')
 
         .addField('disconnect', 'الخروج من رومك الصوتي')
 
-        .addField('skip', 'تخطي الأغنية')
+        .addField('skip', 'تخطي المقطع')
 
-        .addField('pause', 'ايقاف الاغنية مؤقتا')
+        .addField('pause', 'ايقاف المقطع مؤقتا')
 
-        .addField('resume', 'تكملة الاغنية')
+        .addField('resume', 'تكملة المقطع')
 
         .addField('queue', 'اظهار قائمة التشغيل')
 
-        .addField('np', 'اظهار الاغنية اللي انت مشغلها حاليا')
+        .addField('np', 'اظهار المقطع اللي انت مشغلها حاليا')
 
+	.addField('', '')
+	
+	.addField('مهم', 'ابري ذمتي امام الله وخلقه اني غير مسؤول عن اي اغنيه من البوت هذا')
+	
+	.addField('', '')
+	
         .setFooter('WhybH | All right saved, Mallory.')
 
       message.channel.send(helpEmbed);
