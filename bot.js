@@ -626,7 +626,7 @@ function play(guild, song) {
 
 client.on('message', message => {
 
-    if (message.content === 'help') {
+    if (message.content === '!help') {
 
         let helpEmbed = new Discord.RichEmbed()
 
@@ -650,11 +650,9 @@ client.on('message', message => {
 
         .addField('np', 'اظهار المقطع اللي انت مشغلها حاليا')
 
-	.addField('-', '-')
+	.addField('-', 'مهم')
 	
-	.addField('مهم', 'ابري ذمتي امام الله وخلقه اني غير مسؤول عن اي موسيقى من البوت هذا')
-	
-	.addField('-', '-')
+	.addField('ابري ذمتي امام الله وخلقه اني غير مسؤول عن اي موسيقى من البوت هذا', '-')
 	
         .setFooter('WhybH | All right saved, Mallory.')
 
