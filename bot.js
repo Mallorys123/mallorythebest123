@@ -705,19 +705,19 @@ let args = message.content.split(' ').slice(1).join(' ');
             
             if (sigMessage === "online") {
                 client.user.setStatus("online");
-                message.author.send("Your status was set to online.");
+                message.author.send("الحالة الان __آونلاين__ : يرجى الانتضار حتى يتم تحديث البوت");
             }
             if (sigMessage === "idle") {
                 client.user.setStatus("idle");
-                message.author.send("Your status was set to idle.");
+                message.author.send("الحالة الان __مشغول__ : يرجى الانتضار حتى يتم تحديث البوت");
             }
             if (sigMessage === "invisible") {
                 client.user.setStatus("invisible");
-                message.author.send("Your status was set to invisible.");
+                message.author.send("الحالة الان __آوفلاين__ : يرجى الانتضار حتى يتم تحديث البوت");
             }
             if (sigMessage === "dnd") {
                 client.user.setStatus("dnd");
-                message.author.send("Your status was set to dnd.");
+                message.author.send("الحالة الان __لا تقاطع__ : يرجى الانتضار حتى يتم تحديث البوت");
             }
             // message.author.send("." + message.content);
         
