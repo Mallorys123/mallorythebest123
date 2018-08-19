@@ -42,7 +42,7 @@ const client = new Discord.Client({disableEveryone: true});
 
 
 
-const prefix = "!";
+const prefix = "S7";
 
 /////////////////////////
 
@@ -68,7 +68,7 @@ client.on('message', async msg =>{
 
 
 
-    if(command === `ping`) {
+    if(command === `pingswsws`) {
 
     let embed = new Discord.RichEmbed()
 
@@ -124,7 +124,7 @@ client.on('message', async msg =>{
 
           .setImage(msg.author.avatarURL)
 
-          .setColor("#5074b3")
+          .setColor("#252a2a")
 
           msg.channel.send({embed})
 
@@ -134,7 +134,7 @@ client.on('message', async msg =>{
 
           let embed = new Discord.RichEmbed()
 
-          .setColor("#5074b3")
+          .setColor("#252a2a")
 
           .setImage(sicon)
 
@@ -204,7 +204,7 @@ client.on('message', async msg => {
 
         
 
-        if (!voiceChannel) return msg.channel.send("I can't find you in any voice channel!");
+        if (!voiceChannel) return msg.channel.send("لا أستطيع العثور عليك في الرومات الصوتيه");
 
         
 
@@ -216,7 +216,7 @@ client.on('message', async msg => {
 
 
 
-			return msg.channel.send("I don't have enough permissions to join your voice channel!");
+			return msg.channel.send("ليسَ لدي صلاحية | `Connect`");
 
         }
 
@@ -226,7 +226,7 @@ client.on('message', async msg => {
 
 
 
-			return msg.channel.send("I don't have enough permissions to speak in your voice channel!");
+			return msg.channel.send("ليسَ لدي صلاحية | `Speak`");
 
 		}
 
@@ -236,7 +236,7 @@ client.on('message', async msg => {
 
 
 
-			return msg.channel.sendMessage("I don't have enough permissions to insert a URLs!")
+			return msg.channel.sendMessage("ليسَ لدي صلاحية | `Embed links`")
 
 		}
 
@@ -264,7 +264,7 @@ client.on('message', async msg => {
 
             }
 
-			return msg.channel.send(`**${playlist.title}**, Just added to the queue!`);
+			return msg.channel.send(`**فقط أضيفت بقائمة الانتضار** | ${playlist.title}`);
 
 		} else {
 
@@ -290,15 +290,15 @@ client.on('message', async msg => {
 
                     const embed1 = new Discord.RichEmbed()
 
-                    .setTitle(":mag_right:  YouTube Search Results :")
+                    .setTitle(":mag_right:  البحث الموجود باليوتيوب :")
 
                     .setDescription(`
 
-                    ${videos.map(video2 => `${++index}. **${video2.title}**`).join('\n')}`)
+                    ${videos.map(video2 => `${++index}. ${video2.title}`).join('\n')}`)
 
                     
 
-					.setColor("#f7abab")
+					.setColor("#252a2a")
 
 					msg.channel.sendEmbed(embed1).then(message =>{message.delete(20000)})
 
@@ -324,7 +324,7 @@ client.on('message', async msg => {
 
 						console.error(err);
 
-						return msg.channel.send('No one respone a number!!');
+						return msg.channel.send('لم يتم اختيار عدد');
 
                     }
 
@@ -342,7 +342,7 @@ client.on('message', async msg => {
 
 					console.error(err);
 
-					return msg.channel.send("I didn't find any results!");
+					return msg.channel.send("لم اجد اي نتائج");
 
 				}
 
@@ -362,13 +362,13 @@ client.on('message', async msg => {
 
 
 
-		if (!msg.member.voiceChannel) return msg.channel.send("You Must be in a Voice channel to Run the Music commands!");
+		if (!msg.member.voiceChannel) return msg.channel.send("يجب ان تكون في روم صوتي");
 
-        if (!serverQueue) return msg.channel.send("There is no Queue to skip!!");
+        if (!serverQueue) return msg.channel.send("لا يوجد شيء قيد التشغيل");
 
 
 
-		serverQueue.connection.dispatcher.end('Ok, skipped!');
+		serverQueue.connection.dispatcher.end('تـم التخطي');
 
         return undefined;
 
@@ -378,15 +378,15 @@ client.on('message', async msg => {
 
 
 
-		if (!msg.member.voiceChannel) return msg.channel.send("You Must be in a Voice channel to Run the Music commands!");
+		if (!msg.member.voiceChannel) return msg.channel.send("يجب ان تكون في روم صوتي");
 
-        if (!serverQueue) return msg.channel.send("There is no Queue to stop!!");
+        if (!serverQueue) return msg.channel.send("لا يوجد شيء قيد التشغيل");
 
         
 
 		serverQueue.songs = [];
 
-		serverQueue.connection.dispatcher.end('Ok, stopped & disconnected from your Voice channel');
+		serverQueue.connection.dispatcher.end('تـم ايقاف المقطع , والخروج من الروم');
 
         return undefined;
 
@@ -396,11 +396,11 @@ client.on('message', async msg => {
 
 
 
-		if (!msg.member.voiceChannel) return msg.channel.send("You Must be in a Voice channel to Run the Music commands!");
+		if (!msg.member.voiceChannel) return msg.channel.send("يجب ان تكون في روم صوتي");
 
-		if (!serverQueue) return msg.channel.send('You only can use this command while music is playing!');
+		if (!serverQueue) return msg.channel.send('فقط يمكنك استخدام هذا الامر عند تشغيل مقطع');
 
-        if (!args[1]) return msg.channel.send(`The bot volume is **${serverQueue.volume}**`);
+        if (!args[1]) return msg.channel.send(`**الصوت حاليا** | ${serverQueue.volume}`);
 
         
 
@@ -410,7 +410,7 @@ client.on('message', async msg => {
 
         
 
-        return msg.channel.send(`Volume Now is **${args[1]}**`);
+        return msg.channel.send(`**الصوت الأن** | ${args[1]}`);
 
 
 
@@ -418,11 +418,13 @@ client.on('message', async msg => {
 
 
 
-		if (!serverQueue) return msg.channel.send('There is no Queue!');
+		if (!serverQueue) return msg.channel.send('لا يوجد شيء قيد التشغيل');
 
 		const embedNP = new Discord.RichEmbed()
 
-	    .setDescription(`Now playing **${serverQueue.songs[0].title}**`)
+	    .setDescription(`**Now playing :** ${serverQueue.songs[0].title}`)
+	    
+	    .setColor("#252a2a")
 
         return msg.channel.sendEmbed(embedNP);
 
@@ -432,7 +434,7 @@ client.on('message', async msg => {
 
 		
 
-		if (!serverQueue) return msg.channel.send('There is no Queue!!');
+		if (!serverQueue) return msg.channel.send('لا يوجد شيء قيد التشغيل');
 
 		let index = 0;
 
@@ -440,15 +442,15 @@ client.on('message', async msg => {
 
 		const embedqu = new Discord.RichEmbed()
 
-        .setTitle("The Queue Songs :")
+        .setTitle("المقاطع قيد الانتظار")
 
         .setDescription(`
 
-        ${serverQueue.songs.map(song => `${++index}. **${song.title}**`).join('\n')}
+        ${serverQueue.songs.map(song => `${++index}. ${song.title}`).join('\n')}
 
-**Now playing :** **${serverQueue.songs[0].title}**`)
+**المقطع الحالي :** ${serverQueue.songs[0].title}`)
 
-        .setColor("#f7abab")
+        .setColor("#252a2a")
 
 		return msg.channel.sendEmbed(embedqu);
 
@@ -460,7 +462,7 @@ client.on('message', async msg => {
 
 			serverQueue.connection.dispatcher.pause();
 
-			return msg.channel.send('Ok, paused');
+			return msg.channel.send('تـم ايقافه مؤقتا');
 
 		}
 
@@ -476,7 +478,7 @@ client.on('message', async msg => {
 
 			serverQueue.connection.dispatcher.resume();
 
-            return msg.channel.send('Ok, resumed!');
+            return msg.channel.send('تـم الاستئنأف');
 
             
 
@@ -554,7 +556,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 
 			queue.delete(msg.guild.id);
 
-			return msg.channel.send(`Can't join this channel: ${error}!`);
+			return msg.channel.send(`لا يمكنني الدخول بالروم الصوتي | ${error}!`);
 
 		}
 
@@ -566,7 +568,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 
 		if (playlist) return undefined;
 
-		else return msg.channel.send(`**${song.title}**, just added to the queue! `);
+		else return msg.channel.send(`**تـم اضافة المقطع بقائمة الانتظار** | ${song.title}`);
 
 	} 
 
@@ -616,7 +618,7 @@ function play(guild, song) {
 
 
 
-	serverQueue.textChannel.send(`**${song.title}**, is now playing!`);
+	serverQueue.textChannel.send(`**تـم تشغيل** | ${song.title}`);
 
 }
 
@@ -626,29 +628,29 @@ function play(guild, song) {
 
 client.on('message', message => {
 
-    if (message.content === '!help') {
+    if (message.content === 'S7help') {
 
         let helpEmbed = new Discord.RichEmbed()
 
         .setTitle('**اوامر البوت**')
 
-        .setDescription('**برفكس البوت | !**')
+        .setDescription('Prefix : **S7**')
 
-        .addField('play', 'لتشغيل المقطع')
+        .addField('S7play', 'لتشغيل المقطع')
 
-        .addField('join', 'دخول رومك الصوتي')
+        .addField('S7join', 'دخول رومك الصوتي')
 
-        .addField('disconnect', 'الخروج من رومك الصوتي')
+        .addField('S7disconnect', 'الخروج من رومك الصوتي')
 
-        .addField('skip', 'تخطي المقطع')
+        .addField('S7skip', 'تخطي المقطع')
 
-        .addField('pause', 'ايقاف المقطع مؤقتا')
+        .addField('S7pause', 'ايقاف المقطع مؤقتا')
 
-        .addField('resume', 'تكملة المقطع')
+        .addField('S7resume', 'تكملة المقطع')
 
-        .addField('queue', 'اظهار قائمة التشغيل')
+        .addField('S7queue', 'اظهار قائمة التشغيل')
 
-        .addField('np', 'اظهار المقطع اللي انت مشغلها حاليا')
+        .addField('S7np', 'اظهار المقطع اللي انت مشغلها حاليا')
 
 	.addField('-', 'مهم')
 	
@@ -691,6 +693,6 @@ client.on('message', message => {
 client.login(process.env.BOT_TOKEN);
 
   client.on('ready', () => {
-     client.user.setActivity("| !help.",{type: 'WATCHING'});
+     client.user.setActivity("| S7help.",{type: 'WATCHING'});
 
 });
