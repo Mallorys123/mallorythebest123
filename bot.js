@@ -42,112 +42,13 @@ const client = new Discord.Client({disableEveryone: true});
 
 
 
-const prefix = "S7";
-
-/////////////////////////
-
-////////////////////////
-
-
-
-client.on('message', async msg =>{
-
-	if (msg.author.bot) return undefined;
-
-    if (!msg.content.startsWith(prefix)) return undefined;
-
-    
-
-    let args = msg.content.split(' ');
-
-
-
-	let command = msg.content.toLowerCase().split(" ")[0];
-
-	command = command.slice(prefix.length)
-
-
-
-    if(command === `pingswsws`) {
-
-    let embed = new Discord.RichEmbed()
-
-    .setColor(3447003)
-
-    .setTitle("Ping is :")
-
-    .setDescription(`${client.ping} ms,`)
-
-    msg.delete().catch(O_o=>{})
-
-    msg.channel.send(embed);
-
-    }
-
-});
+const prefix = "!!";
 
 /////////////////////////
 
 ////////////////////////
 
 //////////////////////
-
-client.on('message', async msg =>{
-
-	if (msg.author.bot) return undefined;
-
-    if (!msg.content.startsWith(prefix)) return undefined;
-
-    
-
-    let args = msg.content.split(' ');
-
-
-
-	let command = msg.content.toLowerCase().split(" ")[0];
-
-	command = command.slice(prefix.length)
-
-
-
-    if(command === `avatar`){
-
-	if(msg.channel.type === 'dm') return msg.channel.send("Nope Nope!! u can't use avatar command in DMs (:")
-
-        let mentions = msg.mentions.members.first()
-
-        if(!mentions) {
-
-          let sicon = msg.author.avatarURL
-
-          let embed = new Discord.RichEmbed()
-
-          .setImage(msg.author.avatarURL)
-
-          .setColor("#252a2a")
-
-          msg.channel.send({embed})
-
-        } else {
-
-          let sicon = mentions.user.avatarURL
-
-          let embed = new Discord.RichEmbed()
-
-          .setColor("#252a2a")
-
-          .setImage(sicon)
-
-          msg.channel.send({embed})
-
-        }
-
-    };
-
-});
-
-/////////////////////////
-
 ////////////////////////
 
 //////////////////////
@@ -664,42 +565,16 @@ client.on('message', message => {
 
 });
 
-
-
-client.on('message', message => {
-
-    if (message.content === 'mkkkjgeneral_commands') {
-
-        let helpEmbed = new Discord.RichEmbed()
-
-        .setTitle('**أوامر عامة...**')
-
-        .addField('avatar', "افاتار الشخص المطلوب")
-
-        .addField('gif', 'البحث عن جيف انت تطلبه')
-
-        .addField('ping', 'معرفة ping البوت')
-
-        .setFooter('المزيد قريبا ان شاء الله!')
-
-      message.channel.send(helpEmbed);
-
-    }
-
-});
-
-
-
 client.login(process.env.BOT_TOKEN);
 
   client.on('ready', () => {
-     client.user.setActivity("| S7help.",{type: 'WATCHING'});
+     client.user.setActivity("Comming Soon!",{type: 'PLAYING'});
 
 });
 
 client.on('message', async message => {
             if(!message.channel.guild) return;
-             if (message.content.startsWith("Mallory*sets")) {
+             if (message.content.startsWith("!!setstatus")) {
 let args = message.content.split(' ').slice(1).join(' ');
             let sigMessage = await args;
             
