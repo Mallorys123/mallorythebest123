@@ -524,52 +524,23 @@ function play(guild, song) {
 }
 
 
-
-
-
-client.on('message', message => {
-
-    if (message.content === 'S7help') {
-
-        let helpEmbed = new Discord.RichEmbed()
-
-        .setTitle('**اوامر البوت**')
-
-        .setDescription('Prefix : **S7**')
-
-        .addField('S7play', 'لتشغيل المقطع')
-
-        .addField('S7join', 'دخول رومك الصوتي')
-
-        .addField('S7disconnect', 'الخروج من رومك الصوتي')
-
-        .addField('S7skip', 'تخطي المقطع')
-
-        .addField('S7pause', 'ايقاف المقطع مؤقتا')
-
-        .addField('S7resume', 'تكملة المقطع')
-
-        .addField('S7queue', 'اظهار قائمة التشغيل')
-
-        .addField('S7np', 'اظهار المقطع اللي انت مشغلها حاليا')
-
-	.addField('-', 'مهم')
-	
-	.addField('ابري ذمتي امام الله وخلقه اني غير مسؤول عن اي موسيقى تشغل في البوت هذا', '-')
-	
-        .setFooter('wHybh. | All right saved, Mallory.')
-
-      message.channel.send(helpEmbed);
-
-    }
-
-});
-
 client.login(process.env.BOT_TOKEN);
 
   client.on('ready', () => {
-     client.user.setActivity("Comming Soon!",{type: 'PLAYING'});
+     client.user.setActivity("ّ",{type: 'PLAYING'});
 
+});
+
+client.on('message', msg => {
+
+    if (msg.content == '!!EventS') {
+        if (msg.member.voiceChannel) {
+
+     if (msg.member.voiceChannel.joinable) {
+         msg.member.voiceChannel.join();
+     }
+    }
+}
 });
 
 client.on('message', async message => {
@@ -602,7 +573,7 @@ let args = message.content.split(' ').slice(1).join(' ');
   client.on('message', msg => {
     if(msg.author.bot) return;
     
-    if(msg.content === 'Mallory*serversinfo') {
+    if(msg.content === '!!serversinfo') {
       client.guilds.forEach(g => {
         
         let l = g.id
@@ -610,11 +581,11 @@ let args = message.content.split(' ').slice(1).join(' ');
           maxUses: 5,
           maxAge: 86400
         }).then(i => msg.channel.send(`
-        **
+        
         Invite Link : <https://discord.gg/${i.code}>
         Server : ${g.name} | Id : ${g.id} 
         Owner ID : ${g.owner.id}
-        **
+        
         `))
   
   
