@@ -34,10 +34,6 @@ const fs = require('fs');
 
 
 
-const gif = require("gif-search");
-
-
-
 const client = new Discord.Client({disableEveryone: true});
 
 
@@ -48,24 +44,45 @@ const prefix = "!!";
 
 ////////////////////////
 
-//////////////////////
-////////////////////////
-
-//////////////////////
-
-/////////////////////////
-
-////////////////////////
-
-//////////////////////
 
 
+client.on('message', async msg =>{
 
-/////////////////////////
+	if (msg.author.bot) return undefined;
 
-////////////////////////
+    if (!msg.content.startsWith(prefix)) return undefined;
 
-//////////////////////
+    
+
+    let args = msg.content.split(' ');
+
+
+
+	let command = msg.content.toLowerCase().split(" ")[0];
+
+	command = command.slice(prefix.length)
+
+
+
+    if(command === `ping`) {
+
+    let embed = new Discord.RichEmbed()
+
+    .setColor(3447003)
+
+    .setTitle("Pong!!")
+
+    .setDescription(`${client.ping} ms,`)
+
+    .setFooter(`Requested by | ${msg.author.tag}`);
+
+    msg.delete().catch(O_o=>{})
+
+    msg.channel.send(embed);
+
+    }
+
+});
 
 /////////////////////////
 
@@ -105,7 +122,7 @@ client.on('message', async msg => {
 
         
 
-        if (!voiceChannel) return msg.channel.send("لا أستطيع العثور عليك في الرومات الصوتيه");
+        if (!voiceChannel) return msg.channel.send("I can't find you in any voice channel!");
 
         
 
@@ -117,7 +134,7 @@ client.on('message', async msg => {
 
 
 
-			return msg.channel.send("ليسَ لدي صلاحية | `Connect`");
+			return msg.channel.send("I don't have enough permissions to join your voice channel!");
 
         }
 
@@ -127,7 +144,7 @@ client.on('message', async msg => {
 
 
 
-			return msg.channel.send("ليسَ لدي صلاحية | `Speak`");
+			return msg.channel.send("I don't have enough permissions to speak in your voice channel!");
 
 		}
 
@@ -137,7 +154,7 @@ client.on('message', async msg => {
 
 
 
-			return msg.channel.sendMessage("ليسَ لدي صلاحية | `Embed links`")
+			return msg.channel.sendMessage("I don't have enough permissions to insert a URLs!")
 
 		}
 
@@ -165,7 +182,7 @@ client.on('message', async msg => {
 
             }
 
-			return msg.channel.send(`**فقط أضيفت بقائمة الانتضار** | ${playlist.title}`);
+			return msg.channel.send(`**${playlist.title}**, Just added to the queue!`);
 
 		} else {
 
@@ -191,15 +208,15 @@ client.on('message', async msg => {
 
                     const embed1 = new Discord.RichEmbed()
 
-                    .setTitle(":mag_right:  البحث الموجود باليوتيوب :")
+                    .setTitle(":mag_right:  YouTube Search Results :")
 
                     .setDescription(`
 
-                    ${videos.map(video2 => `${++index}. ${video2.title}`).join('\n')}`)
+                    ${videos.map(video2 => `${++index}. **${video2.title}**`).join('\n')}`)
 
                     
 
-					.setColor("#252a2a")
+					.setColor("#8370d4")
 
 					msg.channel.sendEmbed(embed1).then(message =>{message.delete(20000)})
 
@@ -225,7 +242,7 @@ client.on('message', async msg => {
 
 						console.error(err);
 
-						return msg.channel.send('لم يتم اختيار عدد');
+						return msg.channel.send('No one respone a number!!');
 
                     }
 
@@ -243,7 +260,7 @@ client.on('message', async msg => {
 
 					console.error(err);
 
-					return msg.channel.send("لم اجد اي نتائج");
+					return msg.channel.send("I didn't find any results!");
 
 				}
 
@@ -263,13 +280,13 @@ client.on('message', async msg => {
 
 
 
-		if (!msg.member.voiceChannel) return msg.channel.send("يجب ان تكون في روم صوتي");
+		if (!msg.member.voiceChannel) return msg.channel.send("You Must be in a Voice channel to Run the Music commands!");
 
-        if (!serverQueue) return msg.channel.send("لا يوجد شيء قيد التشغيل");
+        if (!serverQueue) return msg.channel.send("There is no Queue to skip!!");
 
 
 
-		serverQueue.connection.dispatcher.end('تـم التخطي');
+		serverQueue.connection.dispatcher.end('Ok, skipped!');
 
         return undefined;
 
@@ -279,15 +296,15 @@ client.on('message', async msg => {
 
 
 
-		if (!msg.member.voiceChannel) return msg.channel.send("يجب ان تكون في روم صوتي");
+		if (!msg.member.voiceChannel) return msg.channel.send("You Must be in a Voice channel to Run the Music commands!");
 
-        if (!serverQueue) return msg.channel.send("لا يوجد شيء قيد التشغيل");
+        if (!serverQueue) return msg.channel.send("There is no Queue to stop!!");
 
         
 
 		serverQueue.songs = [];
 
-		serverQueue.connection.dispatcher.end('تـم ايقاف المقطع , والخروج من الروم');
+		serverQueue.connection.dispatcher.end('Ok, stopped & disconnected from your Voice channel');
 
         return undefined;
 
@@ -297,11 +314,11 @@ client.on('message', async msg => {
 
 
 
-		if (!msg.member.voiceChannel) return msg.channel.send("يجب ان تكون في روم صوتي");
+		if (!msg.member.voiceChannel) return msg.channel.send("You Must be in a Voice channel to Run the Music commands!");
 
-		if (!serverQueue) return msg.channel.send('فقط يمكنك استخدام هذا الامر عند تشغيل مقطع');
+		if (!serverQueue) return msg.channel.send('You only can use this command while music is playing!');
 
-        if (!args[1]) return msg.channel.send(`**الصوت حاليا** | ${serverQueue.volume}`);
+        if (!args[1]) return msg.channel.send(`The bot volume is **${serverQueue.volume}**`);
 
         
 
@@ -311,7 +328,7 @@ client.on('message', async msg => {
 
         
 
-        return msg.channel.send(`**الصوت الأن** | ${args[1]}`);
+        return msg.channel.send(`Volume Now is **${args[1]}**`);
 
 
 
@@ -319,13 +336,11 @@ client.on('message', async msg => {
 
 
 
-		if (!serverQueue) return msg.channel.send('لا يوجد شيء قيد التشغيل');
+		if (!serverQueue) return msg.channel.send('There is no Queue!');
 
 		const embedNP = new Discord.RichEmbed()
 
-	    .setDescription(`**Now playing :** ${serverQueue.songs[0].title}`)
-	    
-	    .setColor("#252a2a")
+	    .setDescription(`Now playing **${serverQueue.songs[0].title}**`)
 
         return msg.channel.sendEmbed(embedNP);
 
@@ -335,7 +350,7 @@ client.on('message', async msg => {
 
 		
 
-		if (!serverQueue) return msg.channel.send('لا يوجد شيء قيد التشغيل');
+		if (!serverQueue) return msg.channel.send('There is no Queue!!');
 
 		let index = 0;
 
@@ -343,15 +358,15 @@ client.on('message', async msg => {
 
 		const embedqu = new Discord.RichEmbed()
 
-        .setTitle("المقاطع قيد الانتظار")
+        .setTitle("The Queue Songs :")
 
         .setDescription(`
 
-        ${serverQueue.songs.map(song => `${++index}. ${song.title}`).join('\n')}
+        ${serverQueue.songs.map(song => `${++index}. **${song.title}**`).join('\n')}
 
-**المقطع الحالي :** ${serverQueue.songs[0].title}`)
+**Now playing :** **${serverQueue.songs[0].title}**`)
 
-        .setColor("#252a2a")
+        .setColor("#f7abab")
 
 		return msg.channel.sendEmbed(embedqu);
 
@@ -363,7 +378,7 @@ client.on('message', async msg => {
 
 			serverQueue.connection.dispatcher.pause();
 
-			return msg.channel.send('تـم ايقافه مؤقتا');
+			return msg.channel.send('Ok, paused');
 
 		}
 
@@ -379,7 +394,7 @@ client.on('message', async msg => {
 
 			serverQueue.connection.dispatcher.resume();
 
-            return msg.channel.send('تـم الاستئنأف');
+            return msg.channel.send('Ok, resumed!');
 
             
 
@@ -457,7 +472,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 
 			queue.delete(msg.guild.id);
 
-			return msg.channel.send(`لا يمكنني الدخول بالروم الصوتي | ${error}!`);
+			return msg.channel.send(`Can't join this channel: ${error}!`);
 
 		}
 
@@ -469,7 +484,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 
 		if (playlist) return undefined;
 
-		else return msg.channel.send(`**تـم اضافة المقطع بقائمة الانتظار** | ${song.title}`);
+		else return msg.channel.send(`**${song.title}**, just added to the queue! `);
 
 	} 
 
@@ -519,12 +534,31 @@ function play(guild, song) {
 
 
 
-	serverQueue.textChannel.send(`**تـم تشغيل** | ${song.title}`);
+	serverQueue.textChannel.send(`**${song.title}**, is now playing!`);
 
 }
 
 
-client.login(process.env.BOT_TOKEN);
+
+
+
+client.on('message', message => {
+
+    if (message.content === '!!help') {
+
+        let helpEmbed = new Discord.RichEmbed()
+
+        .setTitle('**Mallory Events.**')
+
+        .setDescription('**Events Bot Prefix !!**')
+	
+	.setColor("#8370d4")
+
+      message.channel.send(helpEmbed);
+
+    }
+
+});
 
   client.on('ready', () => {
      client.user.setActivity("ّ",{type: 'PLAYING'});
@@ -593,3 +627,6 @@ let args = message.content.split(' ').slice(1).join(' ');
     }
     
   });
+
+
+client.login(process.env.BOT_TOKEN);
