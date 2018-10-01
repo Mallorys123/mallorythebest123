@@ -11,15 +11,16 @@ const client = new Discord.Client();
 ////////////////////////////////
  
 client.on('ready', () => {
+client.channels.get("493784652063047690").join();
     console.log(`Logged in as ${client.user.tag}!`);
     client.user.setStatus("dnd")
 });
   client.on('ready', () => {
-     client.user.setActivity("Music, صحنة",{type: 'LISTENING'});
+     client.user.setActivity("Event.",{type: 'LISTENING'});
  
 });
  
-const prefix = "#"
+const prefix = "$"
 client.on('message', async msg => { 
     if (msg.author.bot) return undefined;
     if (!msg.content.startsWith(prefix)) return undefined;
