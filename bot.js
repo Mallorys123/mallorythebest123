@@ -20,7 +20,7 @@ client.channels.get("493784652063047690").join();
  
 });
  
-const prefix = "$"
+const prefix = "$$"
 client.on('message', async msg => { 
     if (msg.author.bot) return undefined;
     if (!msg.content.startsWith(prefix)) return undefined;
